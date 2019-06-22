@@ -51,7 +51,7 @@
                                 <h2 class="bnr-sub-title">MeuIF</h2>
                                 <div class="brn-btn">
                                     <a href="login.php" class="btn btn-download">Login</a>
-                                    <a href="#" class="btn btn-more">Cadastrar</a>
+                                   
                                 </div>
                                 <div class="overlay-detail">
                                     <a href="#feature"><i class="fa fa-angle-down"></i></a>
