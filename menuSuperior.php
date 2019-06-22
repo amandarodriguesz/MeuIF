@@ -1,4 +1,4 @@
- <div class="header">
+ /*<div class="header">
             <div class="bg-color">
                 <header id="main-header">
                     <nav class="navbar navbar-default navbar-fixed-top">

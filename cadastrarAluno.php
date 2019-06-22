@@ -1,5 +1,5 @@
 <?php include_once "funcao.php";
-include 'menuSuperior.php'; ?>
+include 'menuSuperior.php';?>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,8 @@ include 'menuSuperior.php'; ?>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
   </head>
-  <body class="container">
+  <body>
+  <div class="container">
     <h1>Cadastro de Aluno</h1>
     <form method="post" enctype="multipart/form-data" action="cadastroAluno.php">
       <div class="form-group">
@@ -31,5 +32,6 @@ include 'menuSuperior.php'; ?>
 
   <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+  </div>
   </body>
 </html>
