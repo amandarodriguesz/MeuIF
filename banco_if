@@ -1,0 +1,256 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: 22-Jun-2019 às 19:23
+-- Versão do servidor: 10.1.37-MariaDB
+-- versão do PHP: 7.3.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `meuif`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `aluno`
+--
+
+CREATE TABLE `aluno` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `cpf` varchar(11) DEFAULT NULL,
+  `ra` varchar(12) DEFAULT NULL,
+  `instituicao_id` int(11) DEFAULT NULL,
+  `notas` numeric DEFAULT NULL,
+  `faltas` numeric DEFAULT NULL,
+  `responsavel_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `instituicao`
+--
+
+CREATE TABLE `instituicao` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `cnpj` varchar(20) DEFAULT NULL,
+  `data` date DEFAULT NULL,
+  `sobre` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `metas`
+--
+
+CREATE TABLE `metas` (
+  `id` int(11) NOT NULL,
+  `aluno_id` int(11) DEFAULT NULL,
+  `responsavel_id` int(11) DEFAULT NULL,
+  `recompensa` varchar(300) DEFAULT NULL,
+  `objetivo` INT (100)  DEFAULT NULL,
+  `atingido` INT (1)  DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `ocorrencia`
+--
+
+CREATE TABLE `ocorrencia` (
+  `id` int(11) NOT NULL,
+  `aluno_id` int(11) DEFAULT NULL,
+  `instituicao_id` int(11) DEFAULT NULL,
+  `descricao` varchar(200) DEFAULT NULL,
+  `responsavel_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `responsavel`
+--
+
+CREATE TABLE `responsavel` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `cpf` varchar(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tipousuario`
+--
+
+CREATE TABLE `tipousuario` (
+  `id` int(11) NOT NULL,
+  `Nome` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `login` varchar(10) DEFAULT NULL,
+  `senha` varchar(10) DEFAULT NULL,
+  `id_tipo` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `aluno`
+--
+ALTER TABLE `aluno`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Responsavel_Aluno` (`responsavel_id`),
+  ADD KEY `FK_Instituicao_Aluno` (`instituicao_id`);
+
+--
+-- Indexes for table `instituicao`
+--
+ALTER TABLE `instituicao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `metas`
+--
+ALTER TABLE `metas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Responsavel_Meta` (`responsavel_id`),
+  ADD KEY `FK_Instituicao_Meta` (`aluno_id`);
+
+--
+-- Indexes for table `ocorrencia`
+--
+ALTER TABLE `ocorrencia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Responsavel_Ocorrencia` (`responsavel_id`),
+  ADD KEY `FK_Instituicao_Ocorrencia` (`instituicao_id`);
+
+--
+-- Indexes for table `responsavel`
+--
+ALTER TABLE `responsavel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tipousuario`
+--
+ALTER TABLE `tipousuario`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_tipo` (`id_tipo`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `aluno`
+--
+ALTER TABLE `aluno`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `instituicao`
+--
+ALTER TABLE `instituicao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `metas`
+--
+ALTER TABLE `metas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ocorrencia`
+--
+ALTER TABLE `ocorrencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `responsavel`
+--
+ALTER TABLE `responsavel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tipousuario`
+--
+ALTER TABLE `tipousuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `aluno`
+--
+ALTER TABLE `aluno`
+  ADD CONSTRAINT `FK_Instituicao_Aluno` FOREIGN KEY (`instituicao_id`) REFERENCES `instituicao` (`id`),
+  ADD CONSTRAINT `FK_Responsavel_Aluno` FOREIGN KEY (`responsavel_id`) REFERENCES `responsavel` (`id`);
+
+--
+-- Limitadores para a tabela `metas`
+--
+ALTER TABLE `metas`
+  ADD CONSTRAINT `FK_Aluno_Meta` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`id`),
+  ADD CONSTRAINT `FK_Responsavel_Meta` FOREIGN KEY (`responsavel_id`) REFERENCES `responsavel` (`id`);
+
+--
+-- Limitadores para a tabela `ocorrencia`
+--
+ALTER TABLE `ocorrencia`
+  ADD CONSTRAINT `FK_Instituicao_Ocorrencia` FOREIGN KEY (`instituicao_id`) REFERENCES `instituicao` (`id`),
+  ADD CONSTRAINT `FK_Responsavel_Ocorrencia` FOREIGN KEY (`responsavel_id`) REFERENCES `responsavel` (`id`);
+
+--
+-- Limitadores para a tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `FK_tipo` FOREIGN KEY (`id_tipo`) REFERENCES `tipousuario` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

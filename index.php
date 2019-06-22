@@ -48,7 +48,7 @@
                         <div class="row">
                             <div class="banner-info text-center wow fadeIn delay-05s">
 
-                                <h2 class="bnr-sub-title">MeuIF</h2>
+                                <h2 class="bnr-sub-title">Meu<span class="logo-dec">IF</span></h2>
                                 <div class="brn-btn">
                                     <a href="login.php" class="btn btn-download">Login</a>
                                     <a href="#" class="btn btn-more">Cadastrar</a>
@@ -150,24 +150,7 @@
         <!---->
         <!---->
         <!---->
-        <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
-            
-        </section>
-        <!---->
-        <!---->
-       
-        <!---->
-        <section id="blog" class="section-padding wow fadeInUp delay-05s">
-        </section>
-        <!---->
-        <section id="contact" class="section-padding wow fadeInUp delay-05s">
-            <div class="container">
-
-            </div>
-        </section>
-        <!---->
-        <!---->
-        <footer id="contact" class="section-padding wow fadeInUp">
+        <footer id="contact" class="section-padding">
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-6 col-sm-6 col-xs-12">

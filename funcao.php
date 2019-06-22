@@ -4,7 +4,32 @@
     mysqli_set_charset($conexao, 'utf8');
     return $conexao;
   }
-
+  function obterMetas() {
+    $conexao = obterConexao();
+    $resultado = mysqli_query($conexao,
+            "SELECT * FROM metas");
+    $metas = array();
+    if ($resultado) {
+      $metas = mysqli_fetch_all($resultado,
+          MYSQLI_ASSOC);
+    }
+    mysqli_free_result($resultado);
+    mysqli_close($conexao);
+    return $metas;
+  }
+  function obterDadosAluno() {
+    $conexao = obterConexao();
+    $resultado = mysqli_query($conexao,
+            "SELECT * FROM aluno");
+    $alunos = array();
+    if ($resultado) {
+      $alunos = mysqli_fetch_all($resultado,
+          MYSQLI_ASSOC);
+    }
+    mysqli_free_result($resultado);
+    mysqli_close($conexao);
+    return $alunos;
+  }
 /*  function obterQuestoes() {
     $conexao = obterConexao();
     $resultado = mysqli_query($conexao,
