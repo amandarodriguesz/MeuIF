@@ -53,7 +53,6 @@
     $conexao = obterConexao();
     $sql = "insert into questao (pergunta, opcao_a, opcao_b, opcao_c, resposta) values (?, ?, ?, ?, ?)";
     $sentenca = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($sentenca, "sssss", $questao['pergunta'], $questao['opcao_a'], $questao['opcao_b'], $questao['opcao_c'], $questao['resposta']);
     mysqli_stmt_execute($sentenca);
     mysqli_close($conexao);
@@ -147,10 +146,10 @@
    }
 
    function pegaRelatorio($jogador_id){
-    
+
     $conexao = obterConexao();
     $sql = "SELECT jog.nome, ques.pergunta, res.resposta, ques.resposta as certa
-            from resposta res inner join questao ques on res.questao_id = ques.id 
+            from resposta res inner join questao ques on res.questao_id = ques.id
             inner join jogador jog on jog.id = res.jogador_id
             where res.jogador_id = ?";
   $sentenca = mysqli_prepare($conexao, $sql);
@@ -168,5 +167,5 @@
      mysqli_close($conexao);
   return $questoes;
    }
-   
+
  ?>
